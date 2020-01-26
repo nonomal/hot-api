@@ -1,5 +1,9 @@
 # hot-api
 
+
+### 详情 请转到我的博客看  `https://www.lookcos.cn/?p=466`
+
+
 ### 演示网站：
 
 网址 `http://cx.lookcos.cn`
