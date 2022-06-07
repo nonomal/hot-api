@@ -12,7 +12,7 @@ tieba_api = "http://tieba.baidu.com/hottopic/browse/topicList?res_type=1"
 zhihu_api = 'https://www.zhihu.com/api/v3/feed/topstory/hot-lists/total?limit=50&desktop=true'
 headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"}
 
-#组装数据
+#组装数据1
 def packdata(para_data):
     list_data = []
     for i in para_data:
@@ -21,7 +21,7 @@ def packdata(para_data):
         data["url"]=i[1]
         list_data.append(data)
     return list_data
-    
+
 class Spider(object):
     def __init__(self,url=None):
         if url!=None:
@@ -32,9 +32,9 @@ class Spider(object):
 
     #知乎热榜
     def spider_zhihu(self):
-        
+
         list_zhihu = [] #此列表用于储存解析结果
-        res = Spider(zhihu_api).res  
+        res = Spider(zhihu_api).res
         #逐步解析接口返回的json
         zhihu_data = json.loads(res.text)['data']
         for part_zhihu_data in zhihu_data:              #遍历每一个data对象
@@ -42,7 +42,7 @@ class Spider(object):
             zhihu_title = part_zhihu_data['target']['title'] #从对象得到问题的title
             list_zhihu.append([zhihu_title,zhihu_id])          #将id 和title组为一个列表，并添加在list_zhihu列表中
         return packdata(list_zhihu)
-    
+
     #微博热搜
     def spider_weibo(self):
         list_weibo = [] #此列表用于储存解析结果
@@ -90,6 +90,6 @@ class Spider(object):
             bsite_url = i.get('href')
             list_bsite.append([bsite_title,bsite_url])
         return packdata(list_bsite)
-        
+
 Spider().spider_bsite()
 
